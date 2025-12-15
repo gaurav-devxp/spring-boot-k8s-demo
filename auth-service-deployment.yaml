@@ -19,4 +19,7 @@ spec:
       - image: spring-auth-server-demo:0.0.1-SNAPSHOT
         name: spring-auth-server-demo
         resources: {}
+        env:
+          - name: SPRING_SECURITY_OAUTH2_AUTHORIZATIONSERVER_ISSUER
+            value: http://auth-service:9000
 status: {}

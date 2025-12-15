@@ -64,6 +64,8 @@ kubectl apply -f spring-webflux-fn-service-service.yaml
 
 kubectl port-forward service/api-gateway 8080:8080
 
+kubectl delete pods --all
+
 #### Load images in minikube
 
 minikube image load spring-r2dbc-demo:0.0.1-SNAPSHOT
@@ -75,3 +77,7 @@ minikube image load rest-mvc-demo:0.0.1-SNAPSHOT
 minikube image load spring-auth-server-demo:0.0.1-SNAPSHOT 
 
 minikube image load spring-cloud-api-gateway:0.0.1-SNAPSHOT
+
+eval $(minikube docker-env)
+
+eval $(minikube docker-env -u)
