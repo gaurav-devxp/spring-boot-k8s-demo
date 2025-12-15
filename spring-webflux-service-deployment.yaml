@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-webflux-service
+  name: spring-webflux-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-webflux-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: spring-webflux-service
+    spec:
+      containers:
+      - image: spring-r2dbc-demo:0.0.1-SNAPSHOT
+        name: spring-r2dbc-demo
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dockerlocal
+          - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+            value: http://auth-server-demo:9000
+          - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI
+            value: http://auth-server-demo:9000/oauth2/jwks
+status: {}

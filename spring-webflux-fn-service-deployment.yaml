@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-webflux-fn-service
+  name: spring-webflux-fn-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-webflux-fn-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: spring-webflux-fn-service
+    spec:
+      containers:
+      - image: spring-reactive-mongo-demo:0.0.1-SNAPSHOT
+        name: spring-reactive-mongo-demo
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dockerlocal
+          - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+            value: http://auth-server-demo:9000
+          - name: SPRING_MONGODB_HOST
+            value: mongo
+          - name: SPRING_MONGODB_DATABASE
+            value: springreactivedemo
+          - name: SPRING_MONGODB_USERNAME
+            value: root
+          - name: SPRING_MONGODB_PASSWORD
+            value: example
+          - name: SPRING_MONGODB_AUTHENTICATION_DATABASE
+            value: admin
+status: {}

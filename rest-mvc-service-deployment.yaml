@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: rest-mvc-service
+  name: rest-mvc-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-mvc-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: rest-mvc-service
+    spec:
+      containers:
+      - image: rest-mvc-demo:0.0.1-SNAPSHOT
+        name: rest-mvc-demo
+        resources: {}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: dockerlocal
+          - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+            value: http://auth-service:9000
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:mysql://mysql:3306/spring_boot_rest_mvc
+status: {}
